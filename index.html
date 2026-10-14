@@ -1,1 +1,143 @@
-
+<!DOCTYPE html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071a3f">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<title>مدیریت تعمیرات موبایل</title>
+<style>
+:root{--bg:#06122e;--bg2:#0b2a6b;--tx:#eef3ff;--mu:#9db0d6;--cd:rgba(255,255,255,.07);--bd:rgba(255,255,255,.12);--ac:#2a7bff;--gr:#34d399;--rd:#ff6b6b;--yl:#fbbf24;--sh:#0c1d44}
+[data-t=light]{--bg:#e9f0fc;--bg2:#cfe0ff;--tx:#0b1b3a;--mu:#51638a;--cd:rgba(255,255,255,.75);--bd:rgba(11,27,58,.1);--sh:#fff}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:Vazirmatn,Tahoma,sans-serif;background:radial-gradient(120% 60% at 50% 0,var(--bg2),var(--bg) 70%) fixed;color:var(--tx);min-height:100vh;padding-top:env(safe-area-inset-top)}
+main{padding:14px 14px calc(130px + env(safe-area-inset-bottom));max-width:520px;margin:auto}
+.hd{display:flex;align-items:center;gap:12px;margin-bottom:14px}.hd img{width:54px;height:54px;border-radius:50%;border:2px solid var(--bd)}
+.hd h1{font-size:19px;margin:0}.hd small{color:var(--mu);font-size:13px}.hd .sp{flex:1}
+.ib{width:44px;height:44px;border-radius:50%;border:1px solid var(--bd);background:var(--cd);color:var(--tx);font-size:19px;position:relative;margin-inline-start:6px}
+.ib i{position:absolute;top:6px;left:6px;min-width:16px;height:16px;border-radius:8px;background:var(--rd);color:#fff;font:700 10px/16px sans-serif;text-align:center}
+.glass,.tile,.it,.sheet{background:var(--cd);border:1px solid var(--bd);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.hero{border-radius:28px;padding:18px;margin-bottom:14px;background:linear-gradient(160deg,#1458e0,#2a8bff);color:#fff;border:1px solid rgba(255,255,255,.25)}
+.hero .r{display:flex;justify-content:space-between;align-items:center}.chip{border-radius:20px;padding:6px 14px;background:rgba(255,255,255,.18);font-size:13px}
+.big{font-size:34px;font-weight:800;margin:14px 0 10px}.big small{font-size:15px;font-weight:500;opacity:.85}
+.pill{display:block;border-radius:20px;padding:9px 14px;background:rgba(255,255,255,.16);font-size:14px;margin-bottom:12px}
+.st{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.st div{border-radius:18px;padding:10px 4px;text-align:center;background:rgba(255,255,255,.16);font-size:13px}.st b{display:block;font-size:24px}
+.g{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
+.tile{border-radius:20px;padding:12px 4px;text-align:center;color:var(--tx);font:inherit;font-size:12.5px}.tile span{display:block;font-size:22px;margin-bottom:4px}.tile em{display:block;font-style:normal;font-size:11.5px;margin-top:3px;color:var(--mu)}
+h2{font-size:17px;margin:6px 2px 10px}.it{display:flex;align-items:center;gap:10px;border-radius:18px;padding:13px 14px;margin-bottom:9px}.it b{flex:1}.it small{color:var(--mu)}.dot{width:10px;height:10px;border-radius:50%}
+.tag{font-size:12px;border-radius:12px;padding:4px 10px}.late{background:rgba(255,107,107,.18);color:var(--rd)}.ok{background:rgba(52,211,153,.18);color:var(--gr)}.wt{background:rgba(251,191,36,.18);color:var(--yl)}
+.nav{position:fixed;bottom:calc(10px + env(safe-area-inset-bottom));left:12px;right:12px;max-width:496px;margin:auto;display:flex;justify-content:space-around;align-items:center;border-radius:30px;padding:8px;background:var(--sh);border:1px solid var(--bd);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.nav button{background:none;border:0;color:var(--mu);font:inherit;font-size:11.5px;padding:8px 12px;border-radius:20px}.nav button.on{color:var(--ac);background:rgba(42,123,255,.16)}.nav button span{display:block;font-size:20px}
+.nav .fab{width:58px;height:58px;border-radius:50%;background:var(--ac);color:#fff;font-size:30px;padding:0;margin-top:-26px;box-shadow:0 6px 18px rgba(42,123,255,.55)}
+input,select,textarea{width:100%;margin:5px 0 12px;padding:12px;border-radius:14px;border:1px solid var(--bd);background:var(--cd);color:var(--tx);font:inherit;font-size:15px}
+label{font-size:13px;color:var(--mu)}.ch{display:flex;gap:6px;overflow:auto;margin-bottom:10px}.ch button{white-space:nowrap;border:1px solid var(--bd);background:var(--cd);color:var(--tx);border-radius:16px;padding:7px 14px;font:inherit;font-size:13px}.ch .on{background:var(--ac);border-color:var(--ac);color:#fff}
+.btn{width:100%;padding:13px;border:0;border-radius:16px;background:var(--ac);color:#fff;font:inherit;font-size:15px;font-weight:700;margin-top:6px}.btn.s{background:var(--cd);color:var(--tx);border:1px solid var(--bd)}.btn.d{background:rgba(255,107,107,.2);color:var(--rd)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.bk{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:9}.bk.on{display:block}
+.sheet{position:fixed;bottom:0;left:0;right:0;max-width:540px;margin:auto;max-height:90vh;overflow:auto;border-radius:28px 28px 0 0;padding:18px 16px calc(24px + env(safe-area-inset-bottom));background:var(--sh);z-index:10;display:none}.sheet.on{display:block}
+.kv{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd);font-size:14px}.kv span{color:var(--mu)}
+.bars{display:flex;align-items:flex-end;gap:8px;height:150px;margin:10px 0 4px}.bars div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;font-size:11px;color:var(--mu)}.bars i{width:100%;border-radius:8px 8px 0 0;background:var(--ac);min-height:3px}.bars i.p{background:var(--gr)}
+.r3{display:grid;grid-template-columns:1fr 1.5fr 1.1fr;gap:6px}.pcs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}.pc{border:1px solid var(--bd);background:var(--cd);color:var(--tx);border-radius:16px;padding:7px 12px;font:inherit;font-size:13px}.pc.on{background:var(--ac);border-color:var(--ac);color:#fff}
+#wl{position:fixed;inset:0;z-index:30;background:radial-gradient(120% 60% at 50% 0,var(--bg2),var(--bg) 70%);padding:calc(30px + env(safe-area-inset-top)) 24px 30px;display:flex;flex-direction:column;justify-content:center;text-align:center;overflow:auto}#wl .wi{width:140px;height:140px;margin:0 auto 18px;border-radius:32px}#wl p,#wl li{color:var(--mu)}#wl ul{text-align:right;padding-inline-start:20px}#wl label{display:block;text-align:right}.dts{display:flex;justify-content:center;gap:6px;margin:14px}.dts i{width:8px;height:8px;border-radius:4px;background:var(--bd)}.dts i.on{width:22px;background:var(--ac)}
+#toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#000c;color:#fff;padding:10px 18px;border-radius:20px;z-index:20;display:none}
+</style></head><body>
+<main id="app"></main>
+<nav class="nav"><button data-v="home" onclick="G('home')"><span>⌂</span>خانه</button><button data-v="cust" onclick="G('cust')"><span>☺</span>مشتری‌ها</button><button class="fab" onclick="E(0)">+</button><button data-v="rep" onclick="G('rep')"><span>▥</span>گزارش‌ها</button><button data-v="set" onclick="G('set')"><span>⚙</span>تنظیمات</button></nav>
+<div class="bk" id="bk" onclick="X()"></div><div class="sheet" id="sh"></div><div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s),K='mobaile_ali_v1';
+const WN=['در صورت آب‌خوردگی دستگاه، فروشگاه مسئولیتی در قبال خرابی‌های بعدی ندارد.','فروشگاه بیشتر از یک ماه تعهدی برای نگهداری تلفن شما ندارد.','با توجه به نوسانات بازار، تحویل دیرهنگام تلفن همراه به نرخ روز قطعات حساب می‌گردد.','پس از تعویض نمایشگر، تست LCD هنگام تحویل باید با حضور مشتری انجام شود.','ضربه یا دستکاری دستگاه توسط دیگران، گارانتی تعمیر را باطل می‌کند.'];
+const dv=c=>[c.brand,c.dev].filter(Boolean).join(' ');
+let D=Object.assign({c:[],n:1001,bk:Date.now(),hide:0,light:0,shop:{n:'',a:'',p:''},warn:WN.join('\n'),thx:'با تشکر از اعتماد شما 🌹',logo:'',onb:0,nf:0},JSON.parse(localStorage.getItem(K)||'null')),V='home',F='all',Q='',dp;
+const save=()=>localStorage.setItem(K,JSON.stringify(D)),fa=n=>(+n||0).toLocaleString('fa-IR'),M=n=>D.hide?'•••••':fa(n)+' تومان';
+const esc=s=>String(s??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const num=v=>+String(v).replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[,٬\s]/g,'')||0;
+const iso=d=>new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,10),today=()=>iso(new Date()),add=n=>iso(new Date(Date.now()+n*864e5));
+const jd=s=>s?new Date(s+'T12:00:00').toLocaleDateString('fa-IR',{year:'numeric',month:'long',day:'numeric'}):'—';
+const dif=s=>Math.round((new Date(s)-new Date(today()))/864e5),SN={rep:'در حال تعمیر',rdy:'آماده تحویل',del:'تحویل شده'},SC={rep:'var(--yl)',rdy:'var(--gr)',del:'var(--mu)'};
+const toast=t=>{const e=$('#toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',2200)};
+const late=c=>c.st!='del'&&c.due&&c.due<today();
+function stats(){const t=today(),m=t.slice(0,7),o={rep:0,rdy:0,late:0,debt:0,bal:0,rev:0,part:0};
+D.c.forEach(c=>{c.st=='rep'&&o.rep++;c.st=='rdy'&&o.rdy++;late(c)&&o.late++;const b=c.price-c.dep;if(b>0){o.debt++;o.bal+=b}if(c.st=='del'&&(c.dd||'').slice(0,7)==m){o.rev+=c.price;o.part+=c.part}});o.prof=o.rev-o.part;return o}
+function notes(){const s=stats(),n=[],d=Math.floor((Date.now()-D.bk)/864e5);
+if(d>=7)n.push('⚠ '+fa(d)+' روز از آخرین پشتیبان‌گیری گذشته؛ از تنظیمات نسخه پشتیبان بگیر.');
+D.c.filter(c=>c.st!='del'&&c.due&&dif(c.due)>=0&&dif(c.due)<=1).forEach(c=>n.push('⏰ تحویل '+esc(c.name)+' '+(dif(c.due)?'فردا':'امروز')+' است.'));
+if(s.late)n.push('🔴 '+fa(s.late)+' دستگاه دیرکرد دارد.');if(s.rdy)n.push('🟢 '+fa(s.rdy)+' دستگاه آماده تحویل است.');if(s.debt)n.push('💰 '+fa(s.debt)+' مشتری مانده حساب دارند (جمع '+fa(s.bal)+' تومان).');return n}
+const G=v=>{V=v;R();scrollTo(0,0)};
+function R(){document.documentElement.dataset.t=D.light?'light':'';$('#app').innerHTML=({home:H,cust:C,rep:P,set:S})[V]();document.querySelectorAll('.nav button[data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v==V))}
+function H(){const s=stats(),n=notes().length,up=D.c.filter(c=>c.st!='del').sort((a,b)=>(a.due||'z')<(b.due||'z')?-1:1).slice(0,5),mn=new Date().toLocaleDateString('fa-IR',{month:'long',year:'numeric'});
+const T=(i,t,e,f)=>`<button class="tile" onclick="${f}"><span>${i}</span>${t}<em>${e}</em></button>`;
+return `<div class="hd"><img src="${D.logo||'icon-192.png'}"><div><h1>${esc(D.shop.n)||'مدیریت تعمیرات'}</h1><small>${new Date().toLocaleDateString('fa-IR',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</small></div><div class="sp"></div><button class="ib" onclick="D.light=!D.light;save();R()">◐</button><button class="ib" onclick="D.hide=!D.hide;save();R()">${D.hide?'🙈':'👁'}</button><button class="ib" onclick="BL()">🔔${n?'<i>'+fa(n)+'</i>':''}</button></div>
+<div class="hero"><div class="r"><span>درآمد تحویل‌شده این ماه</span><span class="chip">${mn}</span></div><div class="big">${D.hide?'•••••':fa(s.rev)} <small>تومان</small></div><span class="pill">مانده حساب مشتری‌ها: ${M(s.bal)}</span>
+<div class="st"><div><b>${fa(s.rep)}</b>در حال تعمیر</div><div><b>${fa(s.rdy)}</b>آماده تحویل</div><div><b>${fa(s.late)}</b>دیرکرد</div></div></div>
+<div class="g">${T('➕','ثبت مشتری','جدید','E(0)')}${T('👥','مشتری‌ها',fa(D.c.length)+' مورد',"F='all';G('cust')")}${T('⏱','دیرکرد',fa(s.late)+' مورد',"F='late';G('cust')")}${T('✅','آماده تحویل',fa(s.rdy)+' مورد',"F='rdy';G('cust')")}${T('💳','مانده‌ها',fa(s.debt)+' مورد',"F='debt';G('cust')")}${T('📊','گزارش سود','ماهانه',"G('rep')")}${T('🔍','جستجو','نام و شماره',"F='all';G('cust');$('#q').focus()")}${T('💾','پشتیبان',fa(Math.floor((Date.now()-D.bk)/864e5))+' روز پیش','BU()')}</div>
+<h2>تحویل‌های نزدیک</h2>${up.map(c=>`<div class="it" onclick="O(${c.id})"><div style="flex:1"><b>#${c.id} ${esc(c.name)}</b><br><small>${esc(dv(c))} - تحویل ${jd(c.due)}</small></div>${late(c)?`<span class="tag late">${fa(-dif(c.due))} روز دیرکرد</span>`:`<span class="tag ${c.st=='rdy'?'ok':'wt'}">${c.due?fa(dif(c.due))+' روز مانده':SN[c.st]}</span>`}</div>`).join('')||'<p style="color:var(--mu)">هنوز دستگاهی ثبت نشده. با دکمه + اولین مشتری را ثبت کن.</p>'}`}
+function C(){const f=[['all','همه'],['rep','در حال تعمیر'],['rdy','آماده تحویل'],['late','دیرکرد'],['debt','مانده‌دار'],['del','تحویل‌شده']],q=Q.trim().toLowerCase();
+const l=D.c.filter(c=>(F=='all'||(F=='late'?late(c):F=='debt'?c.price>c.dep:c.st==F))&&(!q||[c.name,c.phone,dv(c),c.id].join(' ').toLowerCase().includes(q))).reverse();
+return `<h2>مشتری‌ها</h2><input id="q" placeholder="جستجوی نام، شماره یا کد" value="${esc(Q)}" oninput="Q=this.value;L()"><div class="ch">${f.map(x=>`<button class="${F==x[0]?'on':''}" onclick="F='${x[0]}';R()">${x[1]}</button>`).join('')}</div><div id="ls">${LI(l)}</div>`}
+const LI=l=>l.map(c=>`<div class="it" onclick="O(${c.id})"><span class="dot" style="background:${SC[c.st]}"></span><b>${esc(c.name)}</b><small>#${c.id}</small></div>`).join('')||'<p style="color:var(--mu)">موردی پیدا نشد.</p>';
+function L(){const q=Q.trim().toLowerCase();$('#ls').innerHTML=LI(D.c.filter(c=>(F=='all'||(F=='late'?late(c):F=='debt'?c.price>c.dep:c.st==F))&&(!q||[c.name,c.phone,dv(c),c.id].join(' ').toLowerCase().includes(q))).reverse())}
+function P(){const s=stats(),ms=[];for(let i=5;i>=0;i--){const d=new Date();d.setDate(15);d.setMonth(d.getMonth()-i);ms.push([iso(d).slice(0,7),d.toLocaleDateString('fa-IR',{month:'short'})])}
+const a=ms.map(m=>{let r=0,p=0;D.c.forEach(c=>{if(c.st=='del'&&(c.dd||'').slice(0,7)==m[0]){r+=c.price;p+=c.price-c.part}});return[m[1],r,p]}),mx=Math.max(1,...a.map(x=>x[1]));
+return `<h2>گزارش سود</h2><div class="glass" style="border-radius:22px;padding:14px;margin-bottom:12px"><div class="kv"><span>درآمد این ماه</span><b>${M(s.rev)}</b></div><div class="kv"><span>هزینه قطعه‌ها</span><b>${M(s.part)}</b></div><div class="kv" style="border:0"><span>سود خالص</span><b style="color:var(--gr)">${M(s.prof)}</b></div></div>
+<div class="glass" style="border-radius:22px;padding:14px"><small style="color:var(--mu)">شش ماه اخیر: آبی درآمد، سبز سود</small><div class="bars">${a.map(x=>`<div><div style="flex-direction:row;align-items:flex-end;gap:3px"><i style="height:${x[1]/mx*100}%"></i><i class="p" style="height:${Math.max(0,x[2])/mx*100}%"></i></div>${x[0]}</div>`).join('')}</div></div>
+<h2 style="margin-top:16px">مانده حساب‌ها</h2>${D.c.filter(c=>c.price>c.dep).map(c=>`<div class="it" onclick="O(${c.id})"><b>${esc(c.name)}</b><span class="tag late">${M(c.price-c.dep)}</span></div>`).join('')||'<p style="color:var(--mu)">مانده‌ای وجود ندارد.</p>'}`}
+function S(){return `<h2>تنظیمات</h2>${dp?'<button class="btn" onclick="dp.prompt()">نصب برنامه روی گوشی</button>':'<p style="color:var(--mu);font-size:13px">برای نصب: منوی مرورگر ← «افزودن به صفحه اصلی» یا «Install app».</p>'}
+<button class="btn s" onclick="D.light=!D.light;save();R()">تغییر حالت روشن / تیره</button><button class="btn s" onclick="RE()">ویرایش رسید (فروشگاه، هشدارها، لوگو)</button><button class="btn s" onclick="NT(1)">${D.nf?'اعلان‌ها فعال است ✓':'فعال‌سازی اعلان‌ها'}</button><button class="btn s" onclick="BU()">گرفتن نسخه پشتیبان</button><button class="btn s" onclick="$('#imp').click()">بازیابی از فایل پشتیبان</button><input id="imp" type="file" accept=".json" hidden onchange="IM(this.files[0])">
+<p style="color:var(--mu);font-size:13px">داده‌ها فقط روی همین گوشی ذخیره می‌شوند و برنامه آفلاین کار می‌کند. پشتیبان‌گیری هفتگی را فراموش نکن.</p>`}
+const sheet=h=>{$('#sh').innerHTML=h;$('#sh').classList.add('on');$('#bk').classList.add('on')},X=()=>{$('#sh').classList.remove('on');$('#bk').classList.remove('on')};
+const BL=()=>sheet('<h2>اعلان‌ها</h2>'+(notes().map(x=>`<div class="it">${x}</div>`).join('')||'<p style="color:var(--mu)">اعلان تازه‌ای نیست.</p>'));
+const fi=(i,l,v,t)=>`<label>${l}<input id="f_${i}" ${t=='date'?'type=date':'inputmode='+(t||'text')} value="${esc(v)}"></label>`;
+const BR=['اپل (iPhone)','سامسونگ','شیائومی','ردمی','پوکو','هوآوی','آنر','اوپو','ریلمی','وان‌پلاس','ویوو','نوکیا','سونی','ال‌جی','موتورولا','گوگل پیکسل','تکنو','اینفینیکس','آیتل','زد‌تی‌ای','ایسوس','لنوو','آلکاتل','TCL','ناتینگ','HTC','جی‌ال‌ایکس (GLX)','دیگر'];
+const PR=['صفحه‌نمایش شکسته','تاچ کار نمی‌کند','باتری ضعیف / باد کرده','شارژ نمی‌شود (سوکت)','روشن نمی‌شود','آب‌خوردگی','نرم‌افزار / فلش','هنگ و کندی','ریست / باز کردن رمز','آنتن‌دهی / سیم‌کارت','اسپیکر / صدا','میکروفون','دوربین عقب','دوربین جلو','دکمه‌ها (پاور / ولوم)','اثر انگشت / فیس‌آیدی','وای‌فای / بلوتوث','گرم شدن بیش از حد','قاب / درب پشت','گلس و محافظ','انتقال اطلاعات','ویبره','جک هدفون','اتصال به کامپیوتر'];
+function E(id){const c=id?D.c.find(x=>x.id==id):{name:'',phone:'',brand:'',dev:'',prob:'',price:'',part:'',dep:'',due:add(3),warr:30,note:''},ps=(c.prob||'').split('، ').filter(Boolean),ex=ps.filter(p=>!PR.includes(p)).join('، ');
+sheet(`<h2>${id?'ویرایش':'ثبت'} مشتری</h2>${fi('name','نام مشتری',c.name)}${fi('phone','شماره تماس',c.phone,'tel')}<label>برند گوشی</label><select id="f_brand"><option value="">انتخاب برند</option>${BR.map(b=>`<option ${b==c.brand?'selected':''}>${b}</option>`).join('')}</select>${fi('dev','مدل (مثلاً A12)',c.dev)}<label>مشکلات دستگاه (چند مورد قابل انتخاب)</label><div class="pcs" id="f_pr">${PR.map(p=>`<button type="button" class="pc ${ps.includes(p)?'on':''}" onclick="this.classList.toggle('on')">${p}</button>`).join('')}</div>${fi('ex','مشکل دیگر (توضیح)',ex)}<div class="row">${fi('price','مبلغ تعمیر (تومان)',c.price||'','numeric')}${fi('part','هزینه قطعه (تومان)',c.part||'','numeric')}</div><div class="row">${fi('dep','پیش‌پرداخت',c.dep||'','numeric')}${fi('warr','گارانتی (روز)',c.warr,'numeric')}</div>${jp('due',c.due||add(3))}${fi('note','یادداشت',c.note)}<button class="btn" onclick="SV(${id||0})">ذخیره</button>`)}
+function SV(id){const g=k=>$('#f_'+k).value,ex=g('ex').trim(),o={name:g('name').trim(),phone:g('phone').trim(),brand:g('brand'),dev:g('dev').trim(),prob:[...$('#f_pr').querySelectorAll('.on')].map(b=>b.textContent).concat(ex?[ex]:[]).join('، '),price:num(g('price')),part:num(g('part')),dep:num(g('dep')),warr:num(g('warr')),due:jv('due'),note:g('note').trim()};
+if(!o.name)return toast('نام مشتری را وارد کن');if(id)Object.assign(D.c.find(x=>x.id==id),o);else D.c.push({...o,id:D.n++,st:'rep',cd:today(),dd:''});save();D.nf&&NT();X();R();toast('ذخیره شد')}
+const wa=p=>{p=String(p).replace(/\D/g,'').replace(/^0/,'98');return p};
+function O(id){const c=D.c.find(x=>x.id==id),b=c.price-c.dep,msg=`سلام ${c.name} عزیز، دستگاه شما آماده تحویل است. کد رسید: ${c.id} - ${nm()}`;
+sheet(`<h2>#${c.id} ${esc(c.name)}</h2><span class="tag ${late(c)?'late':c.st=='rdy'?'ok':'wt'}">${late(c)?'دیرکرد - ':''}${SN[c.st]}</span><div style="margin:8px 0">
+<div class="kv"><span>شماره</span><b>${esc(c.phone)||'—'}</b></div><div class="kv"><span>دستگاه</span><b>${esc(dv(c))||'—'}</b></div><div class="kv"><span>کار تعمیر</span><b>${esc(c.prob)||'—'}</b></div><div class="kv"><span>مبلغ</span><b>${M(c.price)}</b></div><div class="kv"><span>دریافتی</span><b>${M(c.dep)}</b></div><div class="kv"><span>مانده</span><b style="color:${b>0?'var(--rd)':'var(--gr)'}">${M(Math.max(b,0))}</b></div><div class="kv"><span>سود این تعمیر</span><b>${M(c.price-c.part)}</b></div><div class="kv"><span>ثبت / تحویل</span><b>${jd(c.cd)} / ${jd(c.due)}</b></div><div class="kv"><span>گارانتی</span><b>${fa(c.warr)} روز</b></div>${c.note?`<div class="kv"><span>یادداشت</span><b>${esc(c.note)}</b></div>`:''}</div>
+<div class="row"><button class="btn ${c.st=='rep'?'':'s'}" onclick="ST(${id},'rep')">در حال تعمیر</button><button class="btn ${c.st=='rdy'?'':'s'}" onclick="ST(${id},'rdy')">آماده تحویل</button></div><button class="btn ${c.st=='del'?'':'s'}" onclick="ST(${id},'del')">تحویل شد</button>
+<div class="row"><a href="tel:${esc(c.phone)}"><button class="btn s">📞 تماس</button></a><a href="https://wa.me/${wa(c.phone)}?text=${encodeURIComponent(msg)}" target="_blank"><button class="btn s">واتساپ</button></a></div>
+<div class="row"><a href="sms:${esc(c.phone)}?body=${encodeURIComponent(msg)}"><button class="btn s">پیامک</button></a><button class="btn s" onclick="PY(${id})">دریافت پرداخت</button></div>
+<button class="btn" onclick="RC(${id})">ساخت و ارسال رسید (عکس)</button><div class="row"><button class="btn s" onclick="E(${id})">ویرایش</button><button class="btn d" onclick="DL(${id})">حذف</button></div>`)}
+function ST(id,s){const c=D.c.find(x=>x.id==id);c.st=s;c.dd=s=='del'?today():'';save();D.nf&&NT();R();O(id)}
+function PY(id){const v=num(prompt('مبلغ دریافتی (تومان):'));if(!v)return;D.c.find(x=>x.id==id).dep+=v;save();R();O(id)}
+function DL(id){if(confirm('این مشتری حذف شود؟')){D.c=D.c.filter(x=>x.id!=id);save();X();R()}}
+function BU(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(D)],{type:'application/json'}));a.download='mobaile-ali-backup-'+today()+'.json';a.click();D.bk=Date.now();save();R();toast('پشتیبان ذخیره شد')}
+function IM(f){if(!f)return;f.text().then(t=>{try{const d=JSON.parse(t);if(!Array.isArray(d.c))throw 0;D=d;save();R();toast('بازیابی شد')}catch(e){toast('فایل پشتیبان معتبر نیست')}})}
+async function RC(id){const c=id<0?{id:1001,name:'نام مشتری',brand:'سامسونگ',dev:'A12',prob:'تعویض نمایشگر',price:1500000,part:900000,dep:500000,cd:today(),due:add(3),warr:30}:D.c.find(x=>x.id==id),W=640,cv=document.createElement('canvas'),x=cv.getContext('2d');cv.width=W;cv.height=1100;
+const im=new Image();im.src=D.logo||'icon-512.png';await new Promise(r=>{im.onload=im.onerror=r});
+x.fillStyle='#fff';x.fillRect(0,0,W,1100);x.globalAlpha=.06;try{x.filter='grayscale(1)';x.drawImage(im,120,260,400,400);x.filter='none'}catch(e){}x.globalAlpha=1;x.direction='rtl';x.textAlign='right';let y=70;
+const T=(t,s,w,col)=>{x.font=`${w||400} ${s}px Vazirmatn,Tahoma,sans-serif`;x.fillStyle=col||'#111';const ws=String(t).split(' ');let l='';for(const k of ws){if(x.measureText(l+' '+k).width>W-80&&l){x.fillText(l,W-40,y);y+=s*1.6;l=k}else l=l?l+' '+k:k}x.fillText(l,W-40,y);y+=s*1.7};
+const KV=(k,v)=>{x.font='400 20px Tahoma';x.fillStyle='#777';x.fillText(k,W-40,y);x.textAlign='left';x.fillStyle='#111';x.font='600 20px Tahoma';x.fillText(v,40,y);x.textAlign='right';y+=38;x.fillStyle='#e5e5e5';x.fillRect(40,y-24,W-80,1)};
+T(D.shop.n||'رسید تعمیرات',34,800);T([D.shop.a,D.shop.p].filter(Boolean).join(' - '),17,400,'#666');y+=14;
+KV('کد رسید','#'+fa(c.id).replace(/٬/g,''));KV('تاریخ پذیرش',jd(c.cd));KV('مشتری',c.name);KV('دستگاه',dv(c)||'—');KV('کار تعمیر',c.prob||'—');KV('مبلغ',fa(c.price)+' تومان');KV('پیش‌پرداخت',fa(c.dep)+' تومان');KV('مانده',fa(Math.max(c.price-c.dep,0))+' تومان');KV('تاریخ تحویل',jd(c.due));KV('گارانتی',fa(c.warr)+' روز');
+y+=14;T('هشدارهای مهم تعمیرات',22,700);D.warn.split('\n').filter(Boolean).forEach(w=>T('• '+w,16,400,'#444'));y+=6;T(D.thx,22,700);
+const h=y+30,c2=document.createElement('canvas');c2.width=W;c2.height=h;c2.getContext('2d').drawImage(cv,0,0);
+c2.toBlob(async b=>{if(id<0){sheet('<h2>پیش‌نمایش رسید</h2><img style="width:100%;border-radius:12px" src="'+c2.toDataURL()+'"><button class="btn s" onclick="RE()">بازگشت به ویرایش</button>');return}const f=new File([b],'receipt-'+c.id+'.png',{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:'رسید تعمیرات'})}catch(e){}}else{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=f.name;a.click()}})}
+const g2j=(gy,gm,gd)=>{const g=[0,31,59,90,120,151,181,212,243,273,304,334];let y2=gm>2?gy+1:gy,days=355666+365*gy+~~((y2+3)/4)-~~((y2+99)/100)+~~((y2+399)/400)+gd+g[gm-1],jy=-1595+33*~~(days/12053);days%=12053;jy+=4*~~(days/1461);days%=1461;if(days>365){jy+=~~((days-1)/365);days=(days-1)%365}return[jy,days<186?1+~~(days/31):7+~~((days-186)/30),1+(days<186?days%31:(days-186)%30)]};
+const j2g=(jy,jm,jd)=>{jy+=1595;let days=-355668+365*jy+~~(jy/33)*8+~~(((jy%33)+3)/4)+jd+(jm<7?(jm-1)*31:(jm-7)*30+186),gy=400*~~(days/146097);days%=146097;if(days>36524){gy+=100*~~(--days/36524);days%=36524;if(days>=365)days++}gy+=4*~~(days/1461);days%=1461;if(days>365){gy+=~~((days-1)/365);days=(days-1)%365}let gd=days+1;const sa=[0,31,(gy%4==0&&gy%100!=0)||gy%400==0?29:28,31,30,31,30,31,31,30,31,30,31];let gm=0;for(;gm<13&&gd>sa[gm];gm++)gd-=sa[gm];return[gy,gm,gd]};
+const MN=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+function jp(i,v){const[y,m,d]=g2j(...v.split('-').map(Number)),y0=g2j(...today().split('-').map(Number))[0],n=k=>fa(k).replace(/٬/g,''),o=(a,b,sel,f)=>{let h='';for(let k=a;k<=b;k++)h+=`<option value="${k}" ${k==sel?'selected':''}>${f(k)}</option>`;return h};
+return `<label>تاریخ تحویل (شمسی)</label><div class="r3" id="f_${i}"><select>${o(1,31,d,n)}</select><select>${o(1,12,m,k=>MN[k-1])}</select><select>${o(y0-1,y0+2,y,n)}</select></div>`}
+const jv=i=>{let[d,m,y]=[...$('#f_'+i).children].map(e=>+e.value);if(m>6&&d>30)d=30;if(m==12&&d>29)d=29;const[a,b,c]=j2g(y,m,d),z=x=>String(x).padStart(2,'0');return a+'-'+z(b)+'-'+z(c)};
+function SF(){D.shop={n:$('#f_sn').value.trim(),p:$('#f_sp').value.trim(),a:$('#f_sa').value.trim()};D.warn=$('#f_wn').value;D.thx=$('#f_tx').value}
+function RE(){sheet(`<h2>ویرایش رسید</h2>${fi('sn','نام فروشگاه',D.shop.n)}${fi('sp','شماره تماس',D.shop.p,'tel')}${fi('sa','آدرس',D.shop.a)}<label>هشدارهای رسید (هر خط یک مورد)</label><textarea id="f_wn" rows="6">${esc(D.warn)}</textarea>${fi('tx','متن پایان رسید',D.thx)}<label>لوگوی فروشگاه (اختیاری)</label><input type="file" accept="image/*" onchange="LG(this.files[0])"><button class="btn" onclick="SF();save();R();X();toast('ذخیره شد')">ذخیره</button><button class="btn s" onclick="SF();save();R();RC(-1)">ذخیره و پیش‌نمایش</button>${D.logo?`<button class="btn d" onclick="SF();D.logo='';save();R();RE()">حذف لوگو</button>`:''}`)}
+function LG(f){if(!f)return;SF();const r=new FileReader();r.onload=()=>{const i=new Image();i.onload=()=>{const k=Math.min(1,320/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=i.width*k;c.height=i.height*k;c.getContext('2d').drawImage(i,0,0,c.width,c.height);D.logo=c.toDataURL('image/png');save();R();RE();toast('لوگو ثبت شد')};i.src=r.result};r.readAsDataURL(f)}
+function WL(n){n=n||1;const o=$('#wl')||document.body.appendChild(Object.assign(document.createElement('div'),{id:'wl'}));
+o.innerHTML=n==1?`<img src="icon-512.png" class="wi"><h1>به اپ مدیریت تعمیرات موبایل خوش آمدی</h1><p>مشتری‌ها، تعمیرها، مانده حساب و سود ماهانه را یک‌جا و بدون نیاز به اینترنت مدیریت کن.</p><ul><li>ثبت سریع برند، مدل و مشکل دستگاه</li><li>رسید عکسی قابل ویرایش برای ارسال به مشتری</li><li>تاریخ شمسی و یادآور تحویل</li></ul><div class="dts"><i class="on"></i><i></i></div><button class="btn" onclick="WL(2)">بعدی</button>`:`<h1>مشخصات فروشگاه</h1><p>این اطلاعات روی رسید مشتری چاپ می‌شود و بعداً از تنظیمات قابل تغییر است.</p>${fi('on','نام فروشگاه','')}${fi('op','شماره تماس','','tel')}${fi('oa','آدرس','')}<div class="dts"><i></i><i class="on"></i></div><button class="btn" onclick="WF()">شروع کار</button>`}
+function WF(){D.shop={n:$('#f_on').value.trim(),p:$('#f_op').value.trim(),a:$('#f_oa').value.trim()};D.onb=1;save();$('#wl').remove();R();NT(1)}
+const LN=()=>window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.LocalNotifications,nm=()=>D.shop.n||'تعمیرات موبایل';
+async function NT(ask){const ln=LN();
+if(ln){try{if(ask){const p=await ln.requestPermissions();if(p.display!='granted')return toast('اجازه اعلان داده نشد')}
+const pd=await ln.getPending();pd.notifications.length&&await ln.cancel(pd);
+const at=c=>new Date(c.due+'T09:00:00'),it=D.c.filter(c=>c.st!='del'&&c.due&&at(c)>new Date()).map(c=>({id:c.id,title:'یادآور تحویل',body:`امروز موعد تحویل ${c.name} (${dv(c)}) است`,schedule:{at:at(c),allowWhileIdle:true}}));
+it.push({id:999999,title:'پشتیبان‌گیری',body:'یک نسخه پشتیبان از اطلاعات بگیر',schedule:{at:new Date(Date.now()+7*864e5),every:'week'}});
+await ln.schedule({notifications:it});D.nf=1;save();ask&&toast('اعلان‌ها فعال شد')}catch(e){ask&&toast('فعال‌سازی اعلان ناموفق بود')}return}
+if(!('Notification' in window))return ask&&toast('این مرورگر از اعلان پشتیبانی نمی‌کند');
+if(ask&&Notification.permission!='granted'&&await Notification.requestPermission()!='granted')return toast('اجازه اعلان داده نشد');
+D.nf=1;save();ask&&toast('اعلان‌ها فعال شد');if(Notification.permission!='granted'||D.ln==today())return;
+const n=notes();if(!n.length)return;D.ln=today();save();const r=await navigator.serviceWorker.ready;r.showNotification(nm(),{body:n.slice(0,3).join('\n'),icon:'icon-192.png',dir:'rtl',lang:'fa'})}
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;V=='set'&&R()});
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
+R();D.onb||WL();D.nf&&NT();setInterval(()=>D.nf&&NT(),18e5);
+</script></body></html>
