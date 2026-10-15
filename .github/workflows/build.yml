@@ -12,15 +12,28 @@ jobs:
       - name: Prepare files
         run: |
           mkdir -p www assets
-          cp index.html sw.js manifest.webmanifest icon-192.png icon-512.png www/
+          cp index.html sw.js manifest.webmanifest icon-192.png icon-512.png welcome.jpg www/
           cp icon-only.png assets/
       - run: npm install
       - run: npx cap add android
-      - name: App icon
-        continue-on-error: true
+      - run: sed -i 's/<application/<application android:requestLegacyExternalStorage="true"/' android/app/src/main/AndroidManifest.xml
+      - run: sed -i 's#<application#<uses-permission android:name="android.permission.CAMERA"/><application#' android/app/src/main/AndroidManifest.xml
+      - name: Android icons
         run: |
-          npm i --no-save @capacitor/assets
-          npx capacitor-assets generate --android
+          pip install pillow
+          python3 - <<'PY'
+          from PIL import Image,ImageDraw
+          import os,shutil
+          src=Image.open('icon-only.png').convert('RGBA')
+          res='android/app/src/main/res'
+          shutil.rmtree(res+'/mipmap-anydpi-v26',ignore_errors=True)
+          for d,sz in [('mdpi',48),('hdpi',72),('xhdpi',96),('xxhdpi',144),('xxxhdpi',192)]:
+              os.makedirs(f'{res}/mipmap-{d}',exist_ok=True)
+              im=src.resize((sz,sz),Image.LANCZOS)
+              for n in ('ic_launcher','ic_launcher_foreground'): im.save(f'{res}/mipmap-{d}/{n}.png')
+              m=Image.new('L',(sz*4,sz*4),0);ImageDraw.Draw(m).ellipse((0,0,sz*4-1,sz*4-1),fill=255);m=m.resize((sz,sz),Image.LANCZOS)
+              r=Image.new('RGBA',(sz,sz),(0,0,0,0));r.paste(im,(0,0),m);r.save(f'{res}/mipmap-{d}/ic_launcher_round.png')
+          PY
       - run: npx cap sync android
       - run: cd android && chmod +x gradlew && ./gradlew assembleDebug
       - uses: actions/upload-artifact@v4
